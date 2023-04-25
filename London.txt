@@ -1,0 +1,30 @@
+location_name: London
+location_region: City of London, Greater London
+location_country: United Kingdom
+location_latitude: 51.52
+location_longitude: -0.11
+current_last_updated_epoch: 1682461800
+current_last_updated: 2023-04-25 23:30
+current_temperature_celsius: 5.0
+current_temperature_fahrenheit: 41.0
+current_is_day: 0
+current_condition_text: Clear
+current_condition_icon: //cdn.weatherapi.com/weather/64x64/night/113.png
+current_condition_code: 1000
+current_wind_speed_mph: 8.1
+current_wind_speed_kph: 13.0
+current_wind_direction_degree: 150
+current_wind_direction: SSE
+current_pressure_mb: 1019.0
+current_pressure_in: 30.09
+current_precipitation_mm: 0.0
+current_precipitation_in: 0.0
+current_humidity: 75
+current_cloud: 0
+current_feels_like_celsius: 3.3
+current_feels_like_fahrenheit: 37.9
+current_visibility_km: 10.0
+current_visibility_miles: 6.0
+current_uv_index: 1.0
+current_wind_gust_mph: 6.7
+current_wind_gust_kph: 10.8

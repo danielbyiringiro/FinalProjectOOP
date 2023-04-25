@@ -1,0 +1,30 @@
+location_name: Berekuso
+location_region: Volta
+location_country: Ghana
+location_latitude: 5.75
+location_longitude: -0.22
+current_last_updated_epoch: 1682461800
+current_last_updated: 2023-04-25 22:30
+current_temperature_celsius: 29.0
+current_temperature_fahrenheit: 84.2
+current_is_day: 0
+current_condition_text: Partly cloudy
+current_condition_icon: //cdn.weatherapi.com/weather/64x64/night/116.png
+current_condition_code: 1003
+current_wind_speed_mph: 9.4
+current_wind_speed_kph: 15.1
+current_wind_direction_degree: 190
+current_wind_direction: S
+current_pressure_mb: 1011.0
+current_pressure_in: 29.85
+current_precipitation_mm: 0.0
+current_precipitation_in: 0.0
+current_humidity: 79
+current_cloud: 50
+current_feels_like_celsius: 34.3
+current_feels_like_fahrenheit: 93.7
+current_visibility_km: 10.0
+current_visibility_miles: 6.0
+current_uv_index: 1.0
+current_wind_gust_mph: 11.0
+current_wind_gust_kph: 17.6
