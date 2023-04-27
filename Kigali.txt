@@ -1,0 +1,30 @@
+location_name: Kigali
+location_region: Kigali
+location_country: Rwanda
+location_latitude: -1.95
+location_longitude: 30.06
+current_last_updated_epoch: 1682628300
+current_last_updated: 2023-04-27 22:45
+current_temperature_celsius: 19.0
+current_temperature_fahrenheit: 66.2
+current_is_day: 0
+current_condition_text: Partly cloudy
+current_condition_icon: //cdn.weatherapi.com/weather/64x64/night/116.png
+current_condition_code: 1003
+current_wind_speed_mph: 3.8
+current_wind_speed_kph: 6.1
+current_wind_direction_degree: 320
+current_wind_direction: NW
+current_pressure_mb: 1021.0
+current_pressure_in: 30.15
+current_precipitation_mm: 0.3
+current_precipitation_in: 0.01
+current_humidity: 100
+current_cloud: 50
+current_feels_like_celsius: 19.0
+current_feels_like_fahrenheit: 66.2
+current_visibility_km: 10.0
+current_visibility_miles: 6.0
+current_uv_index: 1.0
+current_wind_gust_mph: 2.9
+current_wind_gust_kph: 4.7

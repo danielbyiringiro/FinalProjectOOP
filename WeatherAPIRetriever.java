@@ -3,17 +3,53 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class WeatherAPIRetriever {
     public static final String API_Key = "470fb946a8d245caac2200606230804";
     public static final String API_URL = "http://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no";
+    public static final String API_URL_HISTORICAL = "http://api.weatherapi.com/v1/history.json?key=%s&q=%s&dt=%s";
     private String location;
+    private List<Double> precipitationList = new ArrayList<>();
+    private List<Double> temperatureList = new ArrayList<>();
+    private List<Double> uviList = new ArrayList<>();
+    private List<Double> heatindexList = new ArrayList<>();
+    private List<Double> windAnalysisList = new ArrayList<>();
+    // create accessor methods for the above lists
 
+    public List<Double> getPrecipitationList() {
+        return precipitationList;
+    }
+
+    public List<Double> getTemperatureList() {
+        return temperatureList;
+    }
+
+    public List<Double> getUviList() {
+        return uviList;
+    }
+
+    public List<Double> getHeatindexList() {
+        return heatindexList;
+    }
+
+    public List<Double> getWindAnalysisList() {
+        return windAnalysisList;
+    }
+    
     public WeatherAPIRetriever(String location){
         this.location = location;
+    }
+
+    public String getLocation(){
+        return location;
     }
     public String getCurrentWeather() throws IOException{
         String apiUrl = String.format(API_URL,API_Key,location);
@@ -34,8 +70,32 @@ public class WeatherAPIRetriever {
         return content.toString();
     }
 
-    public static void writeToFile(String jsonString, WeatherAPIRetriever obj) throws IOException {
-        String fileName = obj.location + ".txt";
+    public String getHistoricalWeather(WeatherAPIRetriever obj) throws IOException {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = today.format(formatter);
+        location = obj.location;
+        String apiUrl = String.format(API_URL_HISTORICAL, API_Key, location, formattedDate);
+        URL url = new URL(apiUrl);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line;
+        StringBuilder response = new StringBuilder();
+
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+
+        reader.close();
+        connection.disconnect();
+
+        return response.toString();
+    }
+    public static void writeToFileCurrent(String jsonString, WeatherAPIRetriever obj) throws IOException {
+        String fileName = obj.location +".txt";
         JSONObject json = new JSONObject(jsonString);
         JSONObject location = json.getJSONObject("location");
         JSONObject current = json.getJSONObject("current");
@@ -74,11 +134,56 @@ public class WeatherAPIRetriever {
         }
     }
 
-
+    public void parseHist(String jsonString) throws IOException {
+        JSONObject json = new JSONObject(jsonString);
+        JSONArray forecastdays = json.getJSONObject("forecast").getJSONArray("forecastday");
+        for (int i = 0; i < forecastdays.length(); i++) {
+            JSONObject forecastday = forecastdays.getJSONObject(i);
+            JSONArray hourArray = forecastday.getJSONArray("hour");
+            for (int j = 0; j < hourArray.length(); j++) {
+                JSONObject hour = hourArray.getJSONObject(j);
+                precipitationList.add(hour.getDouble("precip_mm"));
+                temperatureList.add(hour.getDouble("temp_c"));
+                uviList.add(hour.getDouble("uv"));
+                heatindexList.add(hour.getDouble("heatindex_c"));
+                windAnalysisList.add(hour.getDouble("wind_mph"));
+            }
+            }}
+            public void printPrecipitationList() {
+                for (Double value : precipitationList) {
+                    System.out.println(value);
+                }
+            }
+            
+            public void printTemperatureList() {
+                for (Double value : temperatureList) {
+                    System.out.println(value);
+                }
+            }
+            
+            public void printUVIList() {
+                for (Double value : uviList) {
+                    System.out.println(value);
+                }
+            }
+            
+            public void printHeatIndexList() {
+                for (Double value : heatindexList) {
+                    System.out.println(value);
+                }
+            }
+            
+            public void printWindAnalysisList() {
+                for (Double value : windAnalysisList) {
+                    System.out.println(value);
+                }
+            }
     public static void main(String[] args) throws IOException{
         WeatherAPIRetriever retriever = new WeatherAPIRetriever("Berekuso");
         String weatherData = retriever.getCurrentWeather();
-        writeToFile(weatherData, retriever);
-        
-    }
+        writeToFileCurrent(weatherData, retriever);
+        String historicalWeatherData = retriever.getHistoricalWeather(retriever);
+        retriever.parseHist(historicalWeatherData);
+        retriever.printTemperatureList();
+       }
 }
