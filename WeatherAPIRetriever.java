@@ -178,12 +178,5 @@ public class WeatherAPIRetriever {
                     System.out.println(value);
                 }
             }
-    public static void main(String[] args) throws IOException{
-        WeatherAPIRetriever retriever = new WeatherAPIRetriever("Berekuso");
-        String weatherData = retriever.getCurrentWeather();
-        writeToFileCurrent(weatherData, retriever);
-        String historicalWeatherData = retriever.getHistoricalWeather(retriever);
-        retriever.parseHist(historicalWeatherData);
-        retriever.printTemperatureList();
-       }
+
 }

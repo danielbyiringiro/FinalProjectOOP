@@ -41,12 +41,4 @@ public class ReportGenerator {
         return report;
     }
 
-    public static void main(String[] args) throws IOException {
-        WeatherAPIRetriever berekusoApiRetriever = new WeatherAPIRetriever("Kigali");
-        DataProcessor dataProcessor = new DataProcessor(berekusoApiRetriever);
-        WeatherAPIRetriever.writeToFileCurrent(berekusoApiRetriever.getCurrentWeather(),berekusoApiRetriever);
-        ReportGenerator reportGenerator = new ReportGenerator(dataProcessor);
-        String report = reportGenerator.generateReport();
-        System.out.println(report);
-    }
 }

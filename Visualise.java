@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.io.IOException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -363,18 +362,6 @@ public class Visualise {
             }
     }
 
-    public static void main(String[] args) throws IOException{
-        WeatherAPIRetriever berekusoApiRetriever = new WeatherAPIRetriever("Berekuso");
-        String hist = berekusoApiRetriever.getHistoricalWeather(berekusoApiRetriever);
-        berekusoApiRetriever.parseHist(hist);
-        Visualise visualise = new Visualise(berekusoApiRetriever.getPrecipitationList(), berekusoApiRetriever.getTemperatureList(),
-        berekusoApiRetriever.getUviList(), berekusoApiRetriever.getHeatindexList(), berekusoApiRetriever.getWindAnalysisList());
-        visualise.visualiseTemperatureList();
-        visualise.visualiseRainfallList();
-        visualise.visualiseUVIList();
-        visualise.visualiseHeatIndexList();
-        visualise.visualiseWindAnalysisList();
-    }
     }
 
 
